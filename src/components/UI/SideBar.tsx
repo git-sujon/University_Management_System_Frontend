@@ -12,7 +12,8 @@ import {
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { USER_ROLE } from "@/Constants/role";
-import SideBarItems from "@/Constants/SideBarItems";
+import { sidebarItems } from "@/Constants/SideBarItems";
+
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -48,7 +49,7 @@ const items: MenuItem[] = [
 const SideBar = () => {
   const [collapsed, setCollapsed] = useState(false);
 
-  const role = USER_ROLE.ADMIN
+  const role = USER_ROLE.SUPER_ADMIN
 
   return (
     <Sider
@@ -80,7 +81,7 @@ const SideBar = () => {
         theme="dark"
         defaultSelectedKeys={["1"]}
         mode="inline"
-        items={SideBarItems(role)}
+        items={sidebarItems(role)}
       />
     </Sider>
   );
