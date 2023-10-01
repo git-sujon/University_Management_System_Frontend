@@ -1,8 +1,9 @@
-import React from 'react';
 
 const StudentPage = () => {
     return (
-        <div>
+        <div className="" style={{
+            fontSize:"30px"
+        }}>
             this is the StudentPage
         </div>
     );
