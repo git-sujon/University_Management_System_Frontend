@@ -17,7 +17,7 @@ type FormProps = {
   submitHandler: SubmitHandler<any>;
 } & FormConfig;
 
-const From = ({ children, submitHandler, defaultValues }: FormProps) => {
+const Form = ({ children, submitHandler, defaultValues }: FormProps) => {
   const formConfig: FormConfig = {};
 
   if (!!defaultValues) formConfig["defaultValues"] = defaultValues;
@@ -37,4 +37,4 @@ const From = ({ children, submitHandler, defaultValues }: FormProps) => {
   );
 };
 
-export default From;
+export default Form;

@@ -12,7 +12,7 @@ interface IInput {
   label?: string;
 }
 
-const FromInput = ({
+const FormInput = ({
   name,
   type,
   size,
@@ -32,17 +32,26 @@ const FromInput = ({
         control={control}
         name={name}
         render={({ field }) => (
-          <Input
-            type={type}
-            size={size}
-            placeholder={placeHolder}
-            {...field}
-            value={value ? value : field.value}
-          />
+         type === "password" ?
+         <Input.Password
+         type={type}
+         size={size}
+         placeholder={placeHolder}
+         {...field}
+         value={value ? value : field.value}
+       />
+       :
+       <Input
+       type={type}
+       size={size}
+       placeholder={placeHolder}
+       {...field}
+       value={value ? value : field.value}
+     />
         )}
       />
     </>
   );
 };
 
-export default FromInput;
+export default FormInput;
