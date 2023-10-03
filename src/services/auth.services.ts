@@ -5,14 +5,19 @@ import { getFromLocalStorage, setToLocalStorage } from "@/utils/localStorage";
 export const storeUserInfo = ({ accessToken }: { accessToken: string }) => {
   return setToLocalStorage(authKey, accessToken);
 };
-export const getUserInfo = async () => {
-  const localStorageData = getFromLocalStorage(authKey);
+export const getUserInfo = () => {
+  const authToken = getFromLocalStorage(authKey);
 
-  if (localStorageData) {
-    const decodeData = await decodedToken(localStorageData);
-
+  if (authToken) {
+    const decodeData = decodedToken(authToken);
     return decodeData;
   } else {
     return "";
   }
 };
+
+
+export const isLoggedIn = () => {
+  const authToken = getFromLocalStorage(authKey);
+  return !!authToken
+}
