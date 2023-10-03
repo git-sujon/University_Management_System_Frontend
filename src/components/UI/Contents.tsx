@@ -1,11 +1,11 @@
 import React from "react";
-import { Layout, Menu, theme } from "antd";
+import { Layout } from "antd";
 import UMBreadCrump from "./UMBreadCrump";
+import Header from "./Header";
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Content, Footer, Sider } = Layout;
 const Contents = ({ children }: { children: React.ReactNode }) => {
-
-  const base = "admin"
+  const base = "admin";
 
   return (
     <Content
@@ -14,16 +14,19 @@ const Contents = ({ children }: { children: React.ReactNode }) => {
         color: "black",
       }}
     >
-      <UMBreadCrump items= {[
-        {
-          label: `${base}`,
-          link:`/${base}`
-        },
-        {
-          label: `student`,
-          link:`/${base}/student`
-        }
-      ]} />
+      <Header />
+      <UMBreadCrump
+        items={[
+          {
+            label: `${base}`,
+            link: `/${base}`,
+          },
+          {
+            label: `student`,
+            link: `/${base}/student`,
+          },
+        ]}
+      />
       {children}
     </Content>
   );

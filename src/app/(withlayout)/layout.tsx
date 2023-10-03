@@ -20,7 +20,7 @@ useEffect(()=>{
     return router.push("/login")
   }
   setIsLoading(true)
-}, [router])
+}, [router, IsUserLoggedIn, isLoading])
 
 if(!isLoading){
   return <p>Loading ......</p>
