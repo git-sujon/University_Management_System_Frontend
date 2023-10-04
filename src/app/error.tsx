@@ -1,6 +1,8 @@
-import { Row, Spin } from "antd";
+"use client"
 
-const LoadingPage = () => {
+import { Row } from "antd";
+
+const ErrorPage = () => {
   return (
     <Row
       justify={"center"}
@@ -9,9 +11,9 @@ const LoadingPage = () => {
         height: "100vh",
       }}
     >
-      <Spin />
+      <h1>Something Went Wrong</h1>
     </Row>
   );
 };
 
-export default LoadingPage;
+export default ErrorPage;

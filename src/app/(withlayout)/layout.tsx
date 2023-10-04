@@ -6,6 +6,7 @@ import SideBar from "@/components/UI/SideBar";
 import Contents from "@/components/UI/Contents";
 import { isLoggedIn } from "@/services/auth.services";
 import { useRouter } from "next/navigation";
+import LoadingPage from "../loading";
 
 
 
@@ -23,7 +24,7 @@ useEffect(()=>{
 }, [router, IsUserLoggedIn, isLoading])
 
 if(!isLoading){
-  return <p>Loading ......</p>
+  return <LoadingPage />
 }
 
   return (

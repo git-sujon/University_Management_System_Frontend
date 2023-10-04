@@ -5,3 +5,15 @@ export interface IMeta {
     
 
 }
+
+
+export interface IResponseSuccessType {
+    data:any,
+    meta:IMeta
+}
+
+export interface IResponseErrorType {
+    statusCode:string
+    message:string
+    errorMessages:string
+}

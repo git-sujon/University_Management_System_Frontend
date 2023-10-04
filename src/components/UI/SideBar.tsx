@@ -13,7 +13,7 @@ import {
 import type { MenuProps } from "antd";
 import { USER_ROLE } from "@/Constants/role";
 import { sidebarItems } from "@/Constants/SideBarItems";
-
+import { getUserInfo } from "@/services/auth.services";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -49,7 +49,9 @@ const items: MenuItem[] = [
 const SideBar = () => {
   const [collapsed, setCollapsed] = useState(false);
 
-  const role = USER_ROLE.SUPER_ADMIN
+  // const role = USER_ROLE.ADMIN
+
+  const { role } = getUserInfo() as { role: string };
 
   return (
     <Sider
