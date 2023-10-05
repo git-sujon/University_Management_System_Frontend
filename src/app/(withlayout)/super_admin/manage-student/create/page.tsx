@@ -28,8 +28,18 @@ const CreateStudentPage = () => {
         },
       ];
 
+      const handleStudentSubmit = async (data: any) => {
+        console.log("data:", data);
+    
+        try {
+        } catch (error: any) {
+          console.error(error.message);
+        }
+      };
+    
+
     return (
-        <StepperForm steps={steps} />
+        <StepperForm submitHandler= {(value)=> handleStudentSubmit (value)} steps={steps} />
     );
 };
 

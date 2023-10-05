@@ -45,3 +45,37 @@ export const departmentOptions: ISelectOptions[] = [
   },
  
 ];
+
+
+export const academicFacultyOptions: ISelectOptions[] = [
+  'arts',
+  'science',
+  'engineering',
+  'business',
+  'medicine',
+].map((faculty) => ({
+  label: faculty.charAt(0).toUpperCase() + faculty.slice(1),
+  value: faculty.toLowerCase(),
+}));
+export const academicDepartmentOptions: ISelectOptions[] = [
+  'biology',
+  'chemistry',
+  'computer science',
+  'physics',
+  'mathematics',
+  'history',
+  'psychology',
+  'economics',
+].map((department) => ({
+  label: department.charAt(0).toUpperCase() + department.slice(1),
+  value: department.toLowerCase().replace(/\s/g, '_'), // Replace spaces with underscores for values
+}));
+export const academicSemesterOptions: ISelectOptions[] = [
+  'spring',
+  'summer',
+  'fall',
+  'winter',
+].map((semester) => ({
+  label: semester.charAt(0).toUpperCase() + semester.slice(1),
+  value: semester.toLowerCase(),
+}));

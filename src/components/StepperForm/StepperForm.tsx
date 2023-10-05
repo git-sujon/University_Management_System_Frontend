@@ -11,8 +11,10 @@ interface IStep {
   content: React.ReactElement | React.ReactNode;
 }
 
-interface IStepProps {
+interface IStepperFormProps {
   steps: IStep[];
+  submitHandler:(el:any)=> void;
+
 }
 
 type FormConfig = {
@@ -24,7 +26,7 @@ type FormProps = {
   submitHandler: SubmitHandler<any>;
 } & FormConfig;
 
-const StepperForm = ({ steps }: IStepProps) => {
+const StepperForm = ({ steps, submitHandler }: IStepperFormProps) => {
   const { token } = theme.useToken();
   const [current, setCurrent] = useState(0);
 
@@ -51,15 +53,15 @@ const StepperForm = ({ steps }: IStepProps) => {
   const methods = useForm<FormProps>(formConfig);
 
   const { handleSubmit, reset } = methods;
-  //   const onSubmit = (data: any) => {
-  //     submitHandler(data);
-  //     reset();
-  //   };
+    const onSubmit = (data: any) => {
+      submitHandler(data);
+      reset();
+    };
   return (
     <>
       <Steps current={current} items={items} />
       <FormProvider {...methods}>
-        <form>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div>{steps[current].content}</div>
           <div style={{ marginTop: 24 }}>
             {current < steps.length - 1 && (
@@ -70,6 +72,7 @@ const StepperForm = ({ steps }: IStepProps) => {
             {current === steps.length - 1 && (
               <Button
                 type="primary"
+                htmlType="submit"
                 onClick={() => message.success("Processing complete!")}
               >
                 Done
