@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Button, Col, Row } from "antd";
+import { Button, Col, Row, message } from "antd";
 import Image from "next/image";
 import Form from "@/components/Forms/Form";
 import FormInput from "@/components/Forms/FormInput";
@@ -30,6 +30,7 @@ const Login: React.FC = () => {
 
       if (response?.accessToken) {
         router.push("/profile");
+        message.success("Welcome Back")
       }
 
       storeUserInfo({ accessToken: response?.accessToken });
