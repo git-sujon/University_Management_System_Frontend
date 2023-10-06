@@ -1,4 +1,4 @@
-import React, {useState, ReactElement, ReactNode } from "react";
+import React, { useState, ReactElement, ReactNode, useEffect } from "react";
 import { Button, message, Steps, theme } from "antd";
 import {
   useForm,
@@ -6,6 +6,8 @@ import {
   useFormContext,
   SubmitHandler,
 } from "react-hook-form";
+import { getFromLocalStorage, setToLocalStorage } from "@/utils/localStorage";
+import { useRouter } from "next/navigation";
 interface IStep {
   title: string;
   content: React.ReactElement | React.ReactNode;
@@ -13,8 +15,8 @@ interface IStep {
 
 interface IStepperFormProps {
   steps: IStep[];
-  submitHandler:(el:any)=> void;
-
+  submitHandler: (el: any) => void;
+  navigateLink?: string;
 }
 
 type FormConfig = {
@@ -26,9 +28,18 @@ type FormProps = {
   submitHandler: SubmitHandler<any>;
 } & FormConfig;
 
-const StepperForm = ({ steps, submitHandler }: IStepperFormProps) => {
+const StepperForm = ({ steps, submitHandler,navigateLink }: IStepperFormProps) => {
+  const router = useRouter()
   const { token } = theme.useToken();
-  const [current, setCurrent] = useState(0);
+  const [current, setCurrent] = useState<number>(
+    !!getFromLocalStorage("step")
+      ? Number(JSON.parse(getFromLocalStorage("step") as string).step)
+      : 0
+  );
+
+  useEffect(() => {
+    setToLocalStorage("step", JSON.stringify({ step: current }));
+  }, [current]);
 
   const next = () => {
     setCurrent(current + 1);
@@ -41,22 +52,15 @@ const StepperForm = ({ steps, submitHandler }: IStepperFormProps) => {
   const items = steps.map((item) => ({ key: item.title, title: item.title }));
   const formConfig: FormConfig = {};
 
-//   const contentStyle: React.CSSProperties = {
-//     lineHeight: "260px",
-//     textAlign: "center",
-//     color: token.colorTextTertiary,
-//     backgroundColor: token.colorFillAlter,
-//     borderRadius: token.borderRadiusLG,
-//     border: `1px dashed ${token.colorBorder}`,
-//     marginTop: 16,
-//   };
   const methods = useForm<FormProps>(formConfig);
 
   const { handleSubmit, reset } = methods;
-    const onSubmit = (data: any) => {
-      submitHandler(data);
-      reset();
-    };
+  const onSubmit = (data: any) => {
+    submitHandler(data);
+    reset();
+    setToLocalStorage("step", JSON.stringify({ step: 0 }));
+    navigateLink && router.push(navigateLink)
+  };
   return (
     <>
       <Steps current={current} items={items} />

@@ -12,6 +12,7 @@ import FormSelectFields from "@/components/Forms/FormSelectFields";
 import FormTextareaInput from "@/components/Forms/FormTextareaInput";
 import ImageUploader from "@/components/UI/ImageUploader";
 import UMBreadCrump from "@/components/UI/UMBreadCrump";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { Button, Col, Row } from "antd";
 import React from "react";
 
@@ -44,7 +45,7 @@ const CreateAdminPage = () => {
         ]}
       />
 
-      <Form submitHandler={onsubmit}>
+      <Form submitHandler={onsubmit} resolver={yupResolver()} >
         <div
           className="border-2 rounded p-4 my-2 "
           style={{
