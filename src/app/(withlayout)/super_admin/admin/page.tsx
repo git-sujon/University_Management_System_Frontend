@@ -9,7 +9,7 @@ import Link from "next/link";
 const ManageAdmin = () => {
     const { role } = getUserInfo() as { role: string };
     return (
-        <>
+        <div>
         <UMBreadCrump
           items={[
             {
@@ -24,7 +24,7 @@ const ManageAdmin = () => {
               <Button type="primary">Create Admin</Button>
           </Link>
         </ActionsBar>
-      </>
+      </div>
     );
 };
 

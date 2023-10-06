@@ -6,7 +6,7 @@ import React from "react";
 
 const Department = () => {
   return (
-    <>
+    <div>
       <UMBreadCrump
         items={[
           {
@@ -20,7 +20,7 @@ const Department = () => {
           <Button type="primary">Create</Button>
         </Link>
       </ActionsBar>
-    </>
+    </div>
   );
 };
 
