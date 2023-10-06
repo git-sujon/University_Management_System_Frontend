@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { getBaseUrl } from '@/helpers/config/envConfig'
 import { axiosBaseQuery } from '@/helpers/axios/axiosBaseQuery'
+import { tagTypesList } from '../tagTypes'
 
 // Define a service using a base URL and expected endpoints
 export const baseApi = createApi({
@@ -9,11 +10,9 @@ export const baseApi = createApi({
   endpoints: () => ({
    
   }),
-  tagTypes:["user"]
+  tagTypes:tagTypesList
 })
 
-// Export hooks for usage in functional components, which are
-// auto-generated based on the defined endpoints
-export const {  } = baseApi
+
 
 
