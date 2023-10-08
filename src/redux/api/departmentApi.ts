@@ -10,12 +10,8 @@ export const departmentApi = baseApi.injectEndpoints({
         url: `${urlExtension}`,
         method: "GET",
         params: arg,
-        
       }),
       transformResponse: (response, meta) => {
-
-      
-
         return {
           departments: response,
           meta,

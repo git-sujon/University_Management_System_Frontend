@@ -1,25 +1,18 @@
 import { Button } from "antd";
 import Link from "next/link";
 
-type ActionsBarProps ={
-    title:string,
-    children:React.ReactElement | React.ReactNode
-}
+type ActionsBarProps = {
+  title: string;
+  children: React.ReactElement | React.ReactNode;
+};
 
-
-const ActionsBar = ({title, children}:ActionsBarProps) => {
-    return (
-        <>
-        <h1>{title}</h1>
-        <div
-        //  style={{
-        //     display:"flex"
-        // }}
-        >
-            {children}
-        </div>
-      </>
-    );
+const ActionsBar = ({ title, children }: ActionsBarProps) => {
+  return (
+    <div>
+      <h1>{title}</h1>
+      <div  className="flex items-center gap-x-20">{children}</div>
+    </div>
+  );
 };
 
 export default ActionsBar;
