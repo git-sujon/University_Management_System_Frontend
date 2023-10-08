@@ -79,3 +79,5 @@ export const academicSemesterOptions: ISelectOptions[] = [
   label: semester.charAt(0).toUpperCase() + semester.slice(1),
   value: semester.toLowerCase(),
 }));
+
+

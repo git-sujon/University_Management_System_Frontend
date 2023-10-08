@@ -19,6 +19,14 @@ export const departmentApi = baseApi.injectEndpoints({
       },
       providesTags: [tagTypes.department],
     }),
+    getSingleDepartment: build.query({
+      query: (id) => ({
+        url: `${urlExtension}/${id}`,
+        method: "GET",
+      }),
+
+      providesTags: [tagTypes.department],
+    }),
 
     addDepartment: build.mutation({
       query: (data) => ({
@@ -28,8 +36,20 @@ export const departmentApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: [tagTypes.department],
     }),
+    updateDepartment: build.mutation({
+      query: (data) => ({
+        url: `${urlExtension}/${data.id}`,
+        method: "PATCH",
+        data: data.body,
+      }),
+      invalidatesTags: [tagTypes.department],
+    }),
   }),
 });
 
-export const { useGetDepartmentQuery, useAddDepartmentMutation } =
-  departmentApi;
+export const {
+  useGetDepartmentQuery,
+  useGetSingleDepartmentQuery,
+  useAddDepartmentMutation,
+  useUpdateDepartmentMutation,
+} = departmentApi;

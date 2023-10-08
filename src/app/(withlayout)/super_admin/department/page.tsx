@@ -8,8 +8,15 @@ import { useGetDepartmentQuery } from "@/redux/api/departmentApi";
 import { Button, Input } from "antd";
 import Link from "next/link";
 import React, { useState } from "react";
-import { DeleteOutlined, EditOutlined, EyeOutlined, ReloadOutlined } from "@ant-design/icons";
+import {
+  DeleteOutlined,
+  EditOutlined,
+  EyeOutlined,
+  ReloadOutlined,
+} from "@ant-design/icons";
 import { useDeBounced } from "@/hooks/debounced";
+import dayjs from "dayjs";
+import { IMeta } from "@/types";
 
 const Department = () => {
   const columns = [
@@ -24,6 +31,9 @@ const Department = () => {
     {
       title: "CreatedAt",
       dataIndex: "createdAt",
+      render: function (data: any) {
+        return data && dayjs(data).format("MMM D, YYYY hh:mm A");
+      },
       sorter: true,
     },
 
@@ -35,9 +45,11 @@ const Department = () => {
             <Button onClick={() => console.log(data)} type="primary">
               <EyeOutlined />
             </Button>
-            <Button onClick={() => console.log(data)} type="primary">
+            <Link href={`/super_admin/department/edit/${data._id}`}>
+            <Button  type="primary">
               <EditOutlined />
             </Button>
+            </Link>
             <Button onClick={() => console.log(data)} type="primary" danger>
               <DeleteOutlined />
             </Button>
@@ -59,26 +71,20 @@ const Department = () => {
   query["page"] = page;
   query["sortBy"] = sortBy;
   query["sortOrder"] = sortOrder;
- 
-
 
   const deBouncedTerm = useDeBounced({
-    searchQuery:searchTerm, 
-    delay:1500
-  })
+    searchQuery: searchTerm,
+    delay: 1500,
+  });
 
-
-
-
-  if(!!deBouncedTerm){
+  if (!!deBouncedTerm) {
     query["searchTerm"] = deBouncedTerm;
   }
-
 
   const { data, isLoading } = useGetDepartmentQuery({ ...query });
 
   const departments = data?.departments;
-  const meta = data?.meta;
+  const meta:IMeta = data?.meta;
 
   if (isLoading) {
     return <LoadingPage />;
@@ -95,15 +101,11 @@ const Department = () => {
     setSortOrder(order === "ascend" ? "asc" : "desc");
   };
 
-
   const resetFilter = () => {
-    setSearchTerm("")
-    setSortBy("")
-    setSortOrder("")
-  }
-
-
-
+    setSearchTerm("");
+    setSortBy("");
+    setSortOrder("");
+  };
 
   return (
     <div>
@@ -123,7 +125,9 @@ const Department = () => {
               type="text"
               placeholder="search here..."
             />
-             <Button onClick={resetFilter} type="primary"><ReloadOutlined /></Button>
+            <Button onClick={resetFilter} type="primary">
+              <ReloadOutlined />
+            </Button>
           </div>
 
           <Link href={"/super_admin/department/create"}>
