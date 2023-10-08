@@ -4,8 +4,11 @@ import LoadingPage from "@/app/loading";
 import ActionsBar from "@/components/UI/ActionsBar";
 import UMBreadCrump from "@/components/UI/UMBreadCrump";
 import UMTable from "@/components/UI/UMTable";
-import { useGetDepartmentQuery } from "@/redux/api/departmentApi";
-import { Button, Input } from "antd";
+import {
+  useDeleteDepartmentMutation,
+  useGetDepartmentQuery,
+} from "@/redux/api/departmentApi";
+import { Button, Input, message } from "antd";
 import Link from "next/link";
 import React, { useState } from "react";
 import {
@@ -19,6 +22,14 @@ import dayjs from "dayjs";
 import { IMeta } from "@/types";
 
 const Department = () => {
+  const [deleteDepartment] = useDeleteDepartmentMutation();
+
+  const deleteHandler = async (id: string) => {
+    message.loading("deleting...");
+    await deleteDepartment(id);
+    message.success("Department deleted successfully")
+  };
+
   const columns = [
     {
       title: "id",
@@ -46,11 +57,15 @@ const Department = () => {
               <EyeOutlined />
             </Button>
             <Link href={`/super_admin/department/edit/${data._id}`}>
-            <Button  type="primary">
-              <EditOutlined />
-            </Button>
+              <Button type="primary">
+                <EditOutlined />
+              </Button>
             </Link>
-            <Button onClick={() => console.log(data)} type="primary" danger>
+            <Button
+              onClick={() => deleteHandler(data?._id)}
+              type="primary"
+              danger
+            >
               <DeleteOutlined />
             </Button>
           </div>
@@ -84,7 +99,7 @@ const Department = () => {
   const { data, isLoading } = useGetDepartmentQuery({ ...query });
 
   const departments = data?.departments;
-  const meta:IMeta = data?.meta;
+  const meta: IMeta = data?.meta;
 
   if (isLoading) {
     return <LoadingPage />;
