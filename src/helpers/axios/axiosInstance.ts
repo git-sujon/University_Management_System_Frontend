@@ -29,9 +29,11 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   // @ts-ignore
   function (response) {
+
+   
     const responseData = {
       data: response?.data?.data,
-      meta: response?.data?.data,
+      meta: response?.data?.meta
     };
 
     return responseData;
@@ -43,7 +45,7 @@ axiosInstance.interceptors.response.use(
       errorMessages: error?.response?.data?.message,
     };
 
-    return Promise.reject(error);
+    return errorResponse
   }
 );
 
