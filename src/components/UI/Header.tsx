@@ -36,11 +36,11 @@ const router = useRouter()
       }}
       >
         <Dropdown menu={{ items }}>
-          <a href="">
+          <div className="cursor-pointer">
             <Space size={16} wrap>
               <Avatar size={"large"} icon={<UserOutlined />} />
             </Space>
-          </a>
+          </div>
         </Dropdown>
       </Row>
     </AntHeader>

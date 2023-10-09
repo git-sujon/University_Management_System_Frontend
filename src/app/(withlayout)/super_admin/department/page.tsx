@@ -5,6 +5,7 @@ import ActionsBar from "@/components/UI/ActionsBar";
 import UMBreadCrump from "@/components/UI/UMBreadCrump";
 import UMTable from "@/components/UI/UMTable";
 import {
+
   useDeleteDepartmentMutation,
   useGetDepartmentQuery,
 } from "@/redux/api/departmentApi";
@@ -20,15 +21,12 @@ import {
 import { useDeBounced } from "@/hooks/debounced";
 import dayjs from "dayjs";
 import { IMeta } from "@/types";
+import UMModel from "@/components/UI/UMModal";
 
 const Department = () => {
-  const [deleteDepartment] = useDeleteDepartmentMutation();
 
-  const deleteHandler = async (id: string) => {
-    message.loading("deleting...");
-    await deleteDepartment(id);
-    message.success("Department deleted successfully")
-  };
+  const [deleteDepartment] = useDeleteDepartmentMutation();
+ 
 
   const columns = [
     {
@@ -62,12 +60,22 @@ const Department = () => {
               </Button>
             </Link>
             <Button
-              onClick={() => deleteHandler(data?._id)}
+          
               type="primary"
               danger
             >
               <DeleteOutlined />
             </Button>
+            <UMModel
+              data={data?._id}
+              buttonType={"primary"}
+              buttonName={  <DeleteOutlined />}
+              modalTitle={"Are you want to Delete?"}
+              modalContent={"this is the modal for delete"}
+              loadingMessage={"deleting..."}
+              actionFunction={deleteDepartment}
+              successMessage={"Department update successfully"}
+            />
           </div>
         );
       },
